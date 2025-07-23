@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: sample-pod
+  name: sample-pod
+spec:
+  volumes:
+  - name: some-volume
+    emptyDir: {}
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - while true; do echo $date; sleep 60; done;
+    image: alpine:3.12.0
+    name: sample-pod-a
+    volumeMounts:
+    - mountPath: /etc/a
+      name: some-volume
+  - args:
+    - /bin/sh
+    - -c
+    - while true; do echo $date; sleep 60; done;
+    image: alpine:3.12.0
+    name: sample-pod-b
+    volumeMounts:
+    - mountPath: /etc/b
+      name: some-volume
