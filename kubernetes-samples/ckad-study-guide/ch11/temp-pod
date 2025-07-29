@@ -1,0 +1,1 @@
+k run test --image=alpine/curl:3.14 -it --rm --restart=Never -- /bin/sh
