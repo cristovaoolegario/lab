@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-pod
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - 'while true; do touch /tmp/hearthbeat.txt; sleep 5; done;'
+    image: busybox:1.36.1
+    name: liveness-pod
+    livenessProbe:
+      exec:
+        command:
+        - test `find /tmp/hearthbeat.txt -mmin -1`
+      initialDelaySeconds: 5
+      periodSeconds: 30
